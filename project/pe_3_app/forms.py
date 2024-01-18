@@ -11,3 +11,8 @@ class AlumnoForms(forms.ModelForm):
     class Meta:
         model = models.Alumno
         fields = "__all__"
+
+class CursoForms(forms.ModelForm):
+    class Meta:
+        model = models.Curso
+        fields = "__all__"

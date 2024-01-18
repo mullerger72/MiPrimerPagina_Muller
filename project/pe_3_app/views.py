@@ -35,3 +35,18 @@ def alumno_create(request):
     else:
         form = forms.AlumnoForms()
     return render(request, "pe_3_app/alumno_create.html", {"form": form})
+
+def curso_list(request):
+    consulta = models.Curso.objects.all()
+    contexto = {"cursos": consulta}
+    return render(request, "pe_3_app/curso_list.html", contexto)
+
+def curso_create(request):
+    if request.method == "POST":
+        form = forms.CursoForms(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect("curso_list")
+    else:
+        form = forms.CursoForms()
+    return render(request, "pe_3_app/curso_create.html", {"form": form})
