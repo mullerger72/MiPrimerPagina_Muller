@@ -1,6 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 
 from . import models
+from . import forms
 
 def index(request):
     return render(request, "pe_3_app/index.html")
@@ -9,3 +10,13 @@ def profesor_list(request):
     consulta = models.Profesor.objects.all()
     contexto = {"profesores": consulta}
     return render(request, "pe_3_app/profesor_list.html")
+
+def profesor_create(request):
+    if request.method == "POST":
+        form = forms.ProfesorForms(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect("profesor_list")
+    else:
+        form = forms.ProfesorForms()
+    return render(request, "pe_3_app/profesor_create.html", {"form": form})
