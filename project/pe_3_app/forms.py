@@ -6,3 +6,8 @@ class ProfesorForms(forms.ModelForm):
     class Meta:
         model = models.Profesor
         fields = "__all__"
+
+class AlumnoForms(forms.ModelForm):
+    class Meta:
+        model = models.Alumno
+        fields = "__all__"

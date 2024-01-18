@@ -9,7 +9,7 @@ def index(request):
 def profesor_list(request):
     consulta = models.Profesor.objects.all()
     contexto = {"profesores": consulta}
-    return render(request, "pe_3_app/profesor_list.html")
+    return render(request, "pe_3_app/profesor_list.html", contexto)
 
 def profesor_create(request):
     if request.method == "POST":
@@ -20,3 +20,18 @@ def profesor_create(request):
     else:
         form = forms.ProfesorForms()
     return render(request, "pe_3_app/profesor_create.html", {"form": form})
+
+def alumno_list(request):
+    consulta = models.Alumno.objects.all()
+    contexto = {"alumnos": consulta}
+    return render(request, "pe_3_app/alumno_list.html", contexto)
+
+def alumno_create(request):
+    if request.method == "POST":
+        form = forms.AlumnoForms(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect("alumno_list")
+    else:
+        form = forms.AlumnoForms()
+    return render(request, "pe_3_app/alumno_create.html", {"form": form})
